@@ -11,7 +11,7 @@ describe("Pruebas de base de datos", () => {
         db = await connection.db(process.env.__MONGO_DB_NAME__);
     });
     test("Debe insertar dentro de la collección posts", async () => {
-        const posts = db.collection("posts");
+        const posts = db.collection("posts_testing");
         let id = Math.floor(Math.random() * 101);
         const mockPost = {
             _id: id,
@@ -25,7 +25,7 @@ describe("Pruebas de base de datos", () => {
         expect(insertedPost).toEqual(mockPost);
     });
     test("Compara el insertado con otro", async () => {
-        const posts = db.collection("posts");
+        const posts = db.collection("posts_testing");
         let id = Math.floor(Math.random() * 101);
         const mockPost = {
             _id: id,
@@ -47,7 +47,7 @@ describe("Pruebas de base de datos", () => {
     });
     /* SECCIÓN DE USUARIOS */
     test("Debe insertar dentro de la collección usuarios", async () => {
-        const users = db.collection("users");
+        const users = db.collection("users_testing");
         let id = Math.floor(Math.random() * 101);
         const mockUser = {
             _id: id,
@@ -61,7 +61,7 @@ describe("Pruebas de base de datos", () => {
         expect(insertedUser).toEqual(mockUser);
     });
     test("Compara el insertado con otro", async () => {
-        const users = db.collection("users");
+        const users = db.collection("users_testing");
         let id = Math.floor(Math.random() * 101);
         const mockUser = {
             _id: id,
