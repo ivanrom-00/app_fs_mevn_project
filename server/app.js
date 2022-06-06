@@ -17,6 +17,7 @@ app.use(express.static("uploads"));
 mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    family: 4,
     // useFindAndModify: true,
     // useCreateIndex: true
 })
