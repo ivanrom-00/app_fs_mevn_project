@@ -34,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // conexión a la BD
-mongoose.connect(process.env.DB_URI, {
+mongoose.connect(process.env.DB_URI_ONLINE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -44,6 +44,13 @@ mongoose.connect(process.env.DB_URI, {
 // rutas de la API
 app.use('/api/post', require('./routes/posts.routes'));
 app.use('/api/user', require('./routes/users.routes'));
+
+// autenticación con Google
+// require('./controllers/google');
+// app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
+// app.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+//     res.redirect('/');
+// });
 
 // ruta para current user
 app.get('/api/current_user', async (req, res) => {

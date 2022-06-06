@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "server",
     "version": "1.0.0",
     "description": "",
@@ -29,4 +30,34 @@
         "jest": "^28.1.0",
         "nodemon": "^2.0.16"
     }
+=======
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.3.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "serve-static": "^1.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+>>>>>>> 39794fee3be1f6c9d32219c8e060de2e27ed345b
 }

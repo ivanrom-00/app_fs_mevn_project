@@ -19,6 +19,7 @@
                             :type="show ? 'text' : 'password'" name="password" @click:append="show = !show">
                         </v-text-field>
                         <v-btn @click="send" :disabled="!valid" class="mt-3" color="primary">Log In</v-btn>
+                        <!-- <v-btn href="login/google" class="mt-3" color="primary">Google</v-btn> -->
                     </v-form>
                 </v-card>
             </v-col>
@@ -96,6 +97,19 @@ export default {
                         type: 'error',
                     });
                 });
+        },
+        async google() {
+            return axios({
+                method: 'get',
+                // data: {
+                //     email: this.email,
+                //     password: this.password,
+                // },
+                url: '/api/login/google',
+                // headers: {
+                //     'Content-Type': 'application/json',
+                // },
+            })
         },
     },
 };
