@@ -10,7 +10,7 @@ describe("Pruebas de base de datos", () => {
         });
         db = await connection.db(process.env.__MONGO_DB_NAME__);
     });
-    test("Debe insertar dentro de la collección", async () => {
+    test("Debe insertar dentro de la collección posts", async () => {
         const posts = db.collection("posts");
         let id = Math.floor(Math.random() * 101);
         const mockPost = {
@@ -44,6 +44,41 @@ describe("Pruebas de base de datos", () => {
 
         const insertedPost = await posts.findOne({ _id: id });
         expect(insertedPost).toEqual(prueba);
+    });
+    /* SECCIÓN DE USUARIOS */
+    test("Debe insertar dentro de la collección usuarios", async () => {
+        const users = db.collection("users");
+        let id = Math.floor(Math.random() * 101);
+        const mockUser = {
+            _id: id,
+            name: "Nombre de usuario de prueba",
+            email: "prueba@prueba.com",
+            password: "contraseña",
+        };
+        await users.insertOne(mockUser);
+
+        const insertedUser = await users.findOne({ _id: id });
+        expect(insertedUser).toEqual(mockUser);
+    });
+    test("Compara el insertado con otro", async () => {
+        const users = db.collection("users");
+        let id = Math.floor(Math.random() * 101);
+        const mockUser = {
+            _id: id,
+            name: "Nombre de usuario de prueba",
+            email: "prueba@prueba.com",
+            password: "contraseña",
+        };
+        const prueba = {
+            _id: id,
+            name: "Nombre de usuario de prueba erroneo",
+            email: "prueba@prueba.com",
+            password: "contraseña",
+        };
+        await users.insertOne(mockUser);
+
+        const insertedUser = await users.findOne({ _id: id });
+        expect(insertedUser).toEqual(prueba);
     });
     afterAll(async () => {
         await connection.close();
