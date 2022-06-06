@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import API from "../api";
+import API from "../api/post";
 
 export default {
     data() {
@@ -44,10 +44,16 @@ export default {
             formData.append('image', this.image);
             formData.append('title', this.post.title);
             formData.append('category', this.post.category);
+            formData.append('usr', localStorage.getItem('usr'));
             formData.append('content', this.post.content);
             if (this.$refs.form.validate()) {
                 const response = await API.addPost(formData);
-                this.$router.push({ name: 'home', params: { message: response.message } });
+                this.$swal({
+                            // title: 'Congrats!',
+                            text: `${response.message}`,
+                            // type: 'Success',
+                        });
+                        this.$router.push({ name: 'home' });
             }
         }
     },

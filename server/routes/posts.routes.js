@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const API = require('../controllers/api');
+const API = require('../controllers/posts');
 const multer = require('multer');
 
-// multer middleware
+// middleware de multer para actualizar la imagen
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'uploads');
@@ -17,6 +17,7 @@ let upload = multer({
     storage: storage,
 }).single("image");
 
+// rutas
 router.get('/', API.getAllPosts);
 router.get('/:id', API.getPostByID);
 router.post('/', upload, API.createPost);

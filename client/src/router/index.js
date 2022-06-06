@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import AddPost from '../views/AddPost.vue'
 import Post from '../views/Post.vue'
 import EditPost from '../views/EditPost.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,16 @@ const routes = [
     path: '/edit-post/:id',
     name: 'edit-post',
     component: EditPost,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register,
   },
   {
     path: '/about',

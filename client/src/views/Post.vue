@@ -10,8 +10,9 @@
                                 <v-btn small outlined color="primary">{{ post.category }}</v-btn>
                             </v-col>
                             <v-col sm="10" class="d-flex justify-end">
-                                <v-btn color="success" text :to="{ name: 'edit-post', params: { id: post._id } }">Edit</v-btn>
-                                <v-btn color="red" text @click="removePost(post._id)">Delete</v-btn>
+                                <v-btn v-if="author" color="success" text :to="{ name: 'edit-post', params: { id: post._id } }">Edit
+                                </v-btn>
+                                <v-btn v-if="author" color="red" text @click="removePost(post._id)">Delete</v-btn>
                             </v-col>
                         </v-row>
                     </v-card-actions>
@@ -20,6 +21,7 @@
                     </v-card-subtitle>
                     <v-card-text class="grey-text">
                         <p>{{ post.content }}</p>
+                        <p>Posted by: {{ post.usr }}</p>
                         <p>{{ post.created }}</p>
                     </v-card-text>
                 </v-card>
@@ -29,22 +31,33 @@
 </template>
 
 <script>
-import API from '../api';
+import API from '../api/post';
 
 export default {
     data() {
         return {
+            author: false,
             post: {},
         };
     },
     async created() {
         const response = await API.getPostByID(this.$route.params.id);
         this.post = response;
+        const email = localStorage.getItem('usr');
+        if ( email == this.post.usr) {
+                this.author = true;
+            }
     },
     methods: {
         async removePost(id) {
             const response = await API.deletePost(id);
-            this.$router.push({ name: 'home', params: { message: response.message } });
+            // this.$router.push({ name: 'home', params: { message: response.message } });
+            this.$swal({
+                // title: 'Congrats!',
+                text: `${response.message}`,
+                // type: 'Success',
+            });
+            this.$router.push({ name: 'home' });
         },
     },
 }

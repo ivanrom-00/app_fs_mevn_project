@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <v-alert border="left" close-text="Close Alert" color="green accent-4" dark dismissible
+    <!-- <v-alert border="left" close-text="Close Alert" color="green accent-4" dark dismissible
       v-if="this.$route.params.message">
       {{ this.$route.params.message }}
-      </v-alert>
+    </v-alert> -->
     <v-row no-gutters>
       <v-col sm="4" class="pa-3" v-for="post in posts" :key="post._id">
         <v-card class="pa-1" :to="{ name: 'post', params: { id: post._id } }">
@@ -15,7 +15,7 @@
             {{ post.title }}
           </v-card-title>
           <v-card-text class="py-0">
-            <p>{{ post.content.substring(0, 100) + "..." }}</p>
+            <p>{{ post.content.substring(0, 40) + "..." }}</p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import API from '../api';
+import API from '../api/post';
 
 export default {
   name: 'Home',
