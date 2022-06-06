@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import API from "../api";
+import API from "../api/post";
 
 export default {
     data() {
@@ -53,7 +53,13 @@ export default {
             formData.append('old_image', this.post.image);
             if (this.$refs.form.validate()) {
                 const response = await API.updatePost(this.$route.params.id, formData);
-                this.$router.push({ name: 'home', params: { message: response.message } });
+                // this.$router.push({ name: 'home', params: { message: response.message } });
+                this.$swal({
+                            // title: 'Congrats!',
+                            text: `${response.message}`,
+                            // type: 'Success',
+                        });
+                        this.$router.push({ name: 'home' });
             }
         }
     },
