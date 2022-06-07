@@ -57,6 +57,8 @@ export default {
         show: false,
         email: '',
         password: '',
+        url: 'http://localhost:5000',
+        url_online: 'https://vue-interest.herokuapp.com',
         rules: {
             required: value => !!value || 'Required.',
             email: v => /\S+@\S+\.\S+/.test(v) || 'Email must be valid',
@@ -108,19 +110,29 @@ export default {
                 });
         },
         async google() {
-            window.open('http://localhost:5000/google', '_blank').focus();
+            window.open(`${this.url}/google`, '_blank').focus();
             this.$router.push({ name: 'home' });
         },
         async facebook() {
-            window.open('http://localhost:5000/facebook', '_blank').focus();
+            window.open(`${this.url}/facebook`, '_blank').focus();
             this.$router.push({ name: 'home' });
         },
         async twitter() {
-            // window.open('http://localhost:5000/twitter', '_blank').focus();
+            this.$swal({
+                title: 'Comming soon...',
+                text: 'This feature will be added some day',
+                type: 'Success',
+            });
+            // window.open(`${this.url}/twitter`, '_blank').focus();
             // this.$router.push({ name: 'home' });
         },
         async linkedin() {
-            // window.open('http://localhost:5000/linkedin', '_blank').focus();
+            this.$swal({
+                title: 'Comming soon...',
+                text: 'This feature will be added some day',
+                type: 'Success',
+            });
+            // window.open(`${this.url}/linkedin`, '_blank').focus();
             // this.$router.push({ name: 'home' });
         },
     },
