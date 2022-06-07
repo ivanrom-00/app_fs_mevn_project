@@ -44,6 +44,7 @@ mongoose.connect(process.env.DB_URI_ONLINE, {
 // rutas de la API
 app.use('/api/post', require('./routes/posts.routes'));
 app.use('/api/user', require('./routes/users.routes'));
+app.use('/api/rating', require('./routes/ratings.routes'));
 
 // autenticación con Google
 // require('./controllers/google');
