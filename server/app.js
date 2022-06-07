@@ -7,12 +7,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
-const querystring = require('querystring');
-const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
-const serveStatic = require('serve-static');
-const axios = require('axios');
-const jwt = require('jsonwebtoken');
 
 // Controladores de login
 require('./controllers/passport');
@@ -33,8 +27,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("uploads"));
-// app.use(cookieParser());
-// app.use(serveStatic(__dirname + "/dist"));
 
 // middlewares para sesiones
 app.use(session({
@@ -52,6 +44,14 @@ mongoose.connect(process.env.DB_URI_ONLINE, {
 })
     .then(() => console.log('Connected to DB!'))
     .catch(err => console.log(err));
+
+// Acción para desplegar el Front End
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(__dirname + '/dist/'));
+    app.get('*', (req, res) => {
+        res.sendFile(__dirname + '/dist/index.html');
+    });
+}
 
 // rutas de la API
 app.use('/api/post', require('./routes/posts.routes'));

@@ -91,26 +91,15 @@ export default {
                 },
             })
                 .then((res) => {
-                    // localStorage.setItem('auth', res.data.token);
-                    // this.$swal('Felicidades!!', 'Está listo para iniciar!', 'Success');
                     this.$swal({
                         title: 'Congrats!',
                         text: 'You\'re ready to begin',
                         type: 'Success',
                     });
-                    // bus.$emit('refreshUser');
                     this.$router.push({ name: 'home' });
                     this.$router.go(0);
                 })
                 .catch((error) => {
-                    // const message = error.response.data.message;
-                    // const message = error.message;
-                    // this.$swal('Error', `${mensaje}`, 'error');
-                    // this.$swal({
-                    //     title: 'Error',
-                    //     text: `${message}`,
-                    //     type: 'error',
-                    // });
                     this.$swal({
                         title: 'Error',
                         text: 'Wrong username or password',
