@@ -7,8 +7,14 @@ const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
+const querystring = require('querystring');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const serveStatic = require('serve-static');
+const axios = require('axios');
+const jwt = require('jsonwebtoken');
 require('./controllers/passport');
+require('./controllers/google');
 
 // constantes
 const router = express.Router();
@@ -22,6 +28,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("uploads"));
+// app.use(cookieParser());
 // app.use(serveStatic(__dirname + "/dist"));
 
 // middlewares para sesiones
@@ -30,6 +37,10 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+// app.use(cookieSession({
+//     name: 'session',
+//     keys: ['key1', 'key2'],
+// }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,17 +57,43 @@ app.use('/api/post', require('./routes/posts.routes'));
 app.use('/api/user', require('./routes/users.routes'));
 app.use('/api/rating', require('./routes/ratings.routes'));
 
-// autenticación con Google
-// require('./controllers/google');
-// app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
-// app.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-//     res.redirect('/');
-// });
+const isLoggedIn = (req, res, next) => {
+    if (req.user) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
+
+app.get('/home', (req, res) => res.send('You are not logged in'));
+app.get('/google/failed', (req, res) => res.send('Failure during login'));
+app.get('/google/good', isLoggedIn, (req, res) =>  {
+    res.send(`Welcome, ${req.user.displayName}! \nYou can close this tab now. And please refresh the app when you return.`);
+    // console.log(req.user);
+});
+
+app.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/google/callback', passport.authenticate('google', { failureRedirect: '/google/failed' }),
+    (req, res) => {
+        res.redirect('/google/good');
+    });
+
+app.get('/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/home');
+});
 
 // ruta para current user
 app.get('/api/current_user', async (req, res) => {
-    if (req.user) {
-        res.send({ current_user: req.user });
+    try {
+        if (!req.user.emails) {
+            res.send({ current_user: req.user.email });
+        } else {
+            res.send({ current_user: req.user.emails[0].value });
+        }
+    } catch (err) {
+
     }
 });
 

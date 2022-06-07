@@ -12,6 +12,17 @@ module.exports = class API {
         }
     }
 
+    // Obtener los posts de un usuario
+    static async getPostsByUsr(req, res) {
+        const usr = req.params.usr;
+        try {
+            const posts = await Post.find({ usr: usr });
+            res.status(200).json(posts);
+        } catch (err) {
+            res.status(404).json({ message: err.message });
+        }
+    }
+
     // Obtener post por ID
     static async getPostByID(req, res) {
         const id = req.params.id;

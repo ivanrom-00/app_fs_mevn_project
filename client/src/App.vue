@@ -30,6 +30,14 @@
               <v-list-item-title>Home</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item v-if="current_user" :to="{ name: 'my-posts', params: { usr: current_user } }" link>
+            <v-list-item-icon>
+              <v-icon>mdi-note</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>My Posts</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item v-if="current_user" :to="{ name: 'add-post' }" link>
             <v-list-item-icon>
               <v-icon>mdi-note-plus</v-icon>
@@ -60,7 +68,7 @@
       <v-spacer></v-spacer>
 
       <v-app-bar-items class="hidden-sm-and-down">
-        <v-btn plain disabled class="mr-2" v-if="current_user">{{ current_user.email }}</v-btn>
+        <v-btn plain disabled class="mr-2" v-if="current_user">{{ current_user }}</v-btn>
         <v-btn outlined color="green" class="mr-2" :to="{ name: 'login' }" v-if="!current_user">Login</v-btn>
         <v-btn outlined color="cyan" class="ml-2" :to="{ name: 'register' }" v-if="!current_user">Register</v-btn>
         <v-btn outlined color="red" class="ml-2" @click="logout" :to="{ name: 'login' }" v-if="current_user">Logout
@@ -110,7 +118,7 @@ export default {
       })
         .then((res) => {
           this.current_user = res.data.current_user;
-          localStorage.setItem('usr', this.current_user.email);
+          localStorage.setItem('usr', this.current_user);
         })
         .catch(() => {
         });

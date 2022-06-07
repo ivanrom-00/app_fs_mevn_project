@@ -12,6 +12,18 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
         <v-expansion-panel>
+          <v-expansion-panel-header>Institutional info...</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <p>Tecnológico Nacional de México</p>
+            <p>Intituto Tecnológico de la Laguna</p>
+            <p>Ingeniería en Sistemas Computacionales</p>
+            <p>Pila Completa 1</p>
+            <p>Ing. Juan Carlos Rodríguez Ulloa</p>
+            <p>Semestre: Ene-Jun 2022</p>
+            <p>Todos los derechos reservados &copy;</p>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
           <v-expansion-panel-header>Team Members</v-expansion-panel-header>
           <v-expansion-panel-content>
             <p>M Team</p>
@@ -34,7 +46,9 @@
               <li>Swal</li>
               <li>Axios</li>
               <li>Star rating</li>
-              <li>Passport local</li>
+              <li>Passport</li>
+              <li>Passport Local Strategy</li>
+              <li>Passport Google Strategy</li>
               <li>Jest</li>
               <li>Vuex</li>
               <li>Heroku</li>

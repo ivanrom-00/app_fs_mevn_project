@@ -19,6 +19,7 @@ let upload = multer({
 
 // rutas
 router.get('/', API.getAllPosts);
+router.get('/usr/:usr', API.getPostsByUsr);
 router.get('/:id', API.getPostByID);
 router.post('/', upload, API.createPost);
 router.patch('/:id', upload, API.updatePost);

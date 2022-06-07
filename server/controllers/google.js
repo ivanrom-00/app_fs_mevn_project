@@ -1,38 +1,48 @@
-const User = require('../models/User');
 const passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const User = require('../models/User');
+
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+    // User.findById(id, (err, user) => {
+    //     done(err, user);
+    // });
+    done(null, user);
+});
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:8081/login/google/callback",
-    passReqToCallback: true
+    callbackURL: "http://localhost:5000/google/callback"
 },
-    (request, accessToken, refreshToken, profile, done) => {
-        // Controlar login con Google
-        console.log(profile.emails[0].value);
-        // const google_email = profile.emails[0].value;
-        // const user = User.findOne({ email: google_email });
-        // if (!user) {
-        //     const newUser = new User({
-        //         name: profile.displayName,
-        //         google_email,
-        //         googleId: profile.id,
-        //     });
-        //     try {
-        //         newUser.save();
-        //     } catch (err) { }
-        //     return done(null, user);
-        // } else {
-        //     return done(null, user);
-        // }
+    function (accessToken, refreshToken, profile, done) {
+        /*
+         use the profile info (mainly profile id) to check if the user is registerd in ur db
+         If yes select the user and pass him to the done callback
+         If not create the user and then select him and pass to callback
+        */
+        return done(null, profile);
+        // const email = profile.emails[0].value;
+        // User.findOne({ email: email }, (err, user) => {
+        //     if (!user) {
+        //         const newUser = new User({
+        //             nombre: profile.displayName,
+        //             email,
+        //             googleId: profile.id,
+        //         });
+        //         newUser.save((error) => {
+        //             if (error) {
+        //                 //controlar el error
+        //             }
+        //             return done(null, user);
+        //         });
+        //     } else {
+        //         return done(null, user);
+        //     }
+        //     return true;
+        // });
     }
 ));
-
-passport.serializeUser((user, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((user, done) => {
-    done(null, user);
-});

@@ -10,30 +10,41 @@ passport.use(
       passwordField: "password",
     },
     async (email, password, done) => {
-      // Coincidir email del usuario
-      const user = await User.findOne({ email: email });
+      try {
+        // Coincidir email del usuario
+        const user = await User.findOne({ email: email });
 
-      if (!user) {
-        return done(null, false, { message: "User nor found" });
-      } else {
-        // Coincidir password del usuario
-        const match = await user.matchPassword(password);
-        if (match) {
-          return done(null, user);
+        if (!user) {
+          return done(null, false, { message: "User nor found" });
         } else {
-          return done(null, false, { message: "Wrong password" });
+          // Coincidir password del usuario
+          const match = await user.matchPassword(password);
+          if (match) {
+            return done(null, user);
+          } else {
+            return done(null, false, { message: "Wrong password" });
+          }
         }
+      } catch (err) {
+
       }
+
     }
   )
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  // done(null, user.id);
+  done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+passport.deserializeUser((user, done) => {
+  done(null, user);
+
+  // try {
+  //   User.findById(id, (err, user) => {
+  //     done(err, user);
+  //   });
+  // } catch (err) {
+  // }
 });

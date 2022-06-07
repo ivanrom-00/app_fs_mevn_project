@@ -18,8 +18,11 @@
                             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required]"
                             :type="show ? 'text' : 'password'" name="password" @click:append="show = !show">
                         </v-text-field>
-                        <v-btn @click="send" :disabled="!valid" class="mt-3" color="primary">Log In</v-btn>
-                        <!-- <v-btn href="login/google" class="mt-3" color="primary">Google</v-btn> -->
+                        <v-btn @click="send" :disabled="!valid" class="mt-3 mr-2" color="primary">Login</v-btn>
+                        <v-btn @click="google" class="mt-3 ml-2" color="primary">
+                            <v-icon>mdi-google</v-icon>
+                            Login with Google
+                        </v-btn>
                     </v-form>
                 </v-card>
             </v-col>
@@ -83,7 +86,7 @@ export default {
                     this.$router.go(0);
                 })
                 .catch((error) => {
-                    const message = error.response.data.message;
+                    // const message = error.response.data.message;
                     // const message = error.message;
                     // this.$swal('Error', `${mensaje}`, 'error');
                     // this.$swal({
@@ -99,17 +102,9 @@ export default {
                 });
         },
         async google() {
-            return axios({
-                method: 'get',
-                // data: {
-                //     email: this.email,
-                //     password: this.password,
-                // },
-                url: '/api/login/google',
-                // headers: {
-                //     'Content-Type': 'application/json',
-                // },
-            })
+            window.open('http://localhost:5000/google', '_blank').focus();
+            this.$router.push({ name: 'home' });
+            // this.$router.go(0);
         },
     },
 };

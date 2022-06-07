@@ -8,6 +8,12 @@ export default class API {
         return res.data;
     }
 
+    // Obtener los posts de un usuario
+    static async getPostsByUsr(usr) {
+        const res = await axios.get(`${url}/usr/${usr}`);
+        return res.data;
+    }
+
     // Obtener un post por ID
     static async getPostByID(id) {
         const res = await axios.get(`${url}/${id}`);
