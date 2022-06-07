@@ -49,10 +49,13 @@
               <li>Passport</li>
               <li>Passport Local Strategy</li>
               <li>Passport Google Strategy</li>
+              <li>Passport Facebook Strategy</li>
+              <li>Passport Twitter Strategy</li>
+              <li>Passport LinkedIn Strategy</li>
               <li>Jest</li>
               <li>Vuex</li>
-              <li>Heroku</li>
               <li>MongoDB Atlas</li>
+              <li>Heroku</li>
             </ul>
           </v-expansion-panel-content>
         </v-expansion-panel>

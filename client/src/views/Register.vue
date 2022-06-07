@@ -18,14 +18,9 @@
                             hint="At least 8 characters" class="input-group--focused" @click:append="show = !show"
                             label="Password" v-model="user.password" prepend-icon="mdi-lock">
                         </v-text-field>
-                        <!-- <v-text-field name="confirmPass" label="Confirm Password" prepend-icon="mdi-lock-check" v-model="confirm_password" :rules="rules"> -->
-                        <!-- </v-text-field> -->
                         <v-btn @click="send" :disabled="!valid" class="mt-3 mr-2" color="primary">
                             Create Account
                         </v-btn>
-                        <!-- <v-btn @click="clean" class="mt-3 ml-2" color="primary">
-                            Clean
-                        </v-btn> -->
                     </v-form>
                 </v-card>
             </v-col>
@@ -54,47 +49,9 @@ export default {
             },
         };
     },
-    // data: () => ({
-    //     valid: true,
-    //     show: false,
-    //     name: '',
-    //     email: '',
-    //     password: '',
-    //     rules: {
-    //         required: value => !!value || 'Required.',
-    //         min: v => v.length >= 8 || 'Min 8 characters',
-    //         email: v => /\S+@\S+\.\S+/.test(v) || 'Email must be valid',
-    //     },
-    // }),
     methods: {
-        // async submitForm() {
-        //     const formData = new FormData();
-        //     formData.append('name', this.user.name);
-        //     formData.append('email', this.user.email);
-        //     formData.append('password', this.user.password);
-        //     if (this.$refs.form.validate()) {
-        //         try {
-        //             const response = await API.registerUser(formData);
-        //             this.$swal({
-        //                 title: 'Congrats!',
-        //                 text: 'You\'ve created your account',
-        //                 type: 'Success',
-        //             });
-        //             this.$router.push({ name: 'login' });
-        //         } catch (err) {
-        //             const message = err.response.data.message;
-        //             this.$swal({
-        //                 title: 'Error',
-        //                 text: `${message}`,
-        //                 type: 'error',
-        //             });
-        //         }
-
-        //     }
-        // },
         async send() {
             if (this.$refs.form.validate()) {
-                // acciones si es válida la forma (formulario)
                 return axios({
                     method: 'post',
                     data: {
@@ -127,9 +84,6 @@ export default {
             }
             return true;
         },
-        // clean() {
-        //     this.$refs.form.reset();
-        // },
     },
 };
 </script>

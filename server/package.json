@@ -25,8 +25,12 @@
         "morgan": "^1.10.0",
         "multer": "^1.4.5-lts.1",
         "passport": "^0.6.0",
+        "passport-facebook": "^3.0.0",
         "passport-google-oauth20": "^2.0.0",
+        "passport-linkedin": "^1.0.0",
+        "passport-linkedin-oauth2": "^2.0.0",
         "passport-local": "^1.0.0",
+        "passport-twitter": "^1.0.4",
         "querystring": "^0.2.1",
         "serve-static": "^1.15.0"
     },

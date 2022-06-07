@@ -3,8 +3,8 @@
         <v-row no-gutters>
             <v-col sm="10" class="mx-auto">
                 <v-card class="pa-5">
-                    <!-- <v-card-title>Log in</v-card-title>
-                    <v-divider></v-divider> -->
+                    <v-card-title>Login with Account</v-card-title>
+                    <v-divider></v-divider>
                     <!-- <div class="login">
                             <a class="btn facebook" href="/login/facebook">Acceder con Facebook</a>
                             <a class="btn twitter" href="/login/twitter">Acceder con Twitter</a>
@@ -19,11 +19,28 @@
                             :type="show ? 'text' : 'password'" name="password" @click:append="show = !show">
                         </v-text-field>
                         <v-btn @click="send" :disabled="!valid" class="mt-3 mr-2" color="primary">Login</v-btn>
-                        <v-btn @click="google" class="mt-3 ml-2" color="primary">
-                            <v-icon>mdi-google</v-icon>
-                            Login with Google
-                        </v-btn>
+
                     </v-form>
+                </v-card>
+                <v-card class="pa-5 mt-5">
+                    <v-card-title>Login with Social Media</v-card-title>
+                    <v-divider></v-divider>
+                    <v-btn @click="google" class="mt-3 ml-2" color="primary">
+                        <v-icon>mdi-google</v-icon>
+                        Google
+                    </v-btn>
+                    <v-btn @click="facebook" class="mt-3 ml-2" color="primary">
+                        <v-icon>mdi-facebook</v-icon>
+                        Facebook
+                    </v-btn>
+                    <v-btn @click="twitter" class="mt-3 ml-2" color="primary">
+                        <v-icon>mdi-twitter</v-icon>
+                        Twitter
+                    </v-btn>
+                    <v-btn @click="linkedin" class="mt-3 ml-2" color="primary">
+                        <v-icon>mdi-linkedin</v-icon>
+                        LinkedIn
+                    </v-btn>
                 </v-card>
             </v-col>
         </v-row>
@@ -104,7 +121,18 @@ export default {
         async google() {
             window.open('http://localhost:5000/google', '_blank').focus();
             this.$router.push({ name: 'home' });
-            // this.$router.go(0);
+        },
+        async facebook() {
+            window.open('http://localhost:5000/facebook', '_blank').focus();
+            this.$router.push({ name: 'home' });
+        },
+        async twitter() {
+            // window.open('http://localhost:5000/twitter', '_blank').focus();
+            // this.$router.push({ name: 'home' });
+        },
+        async linkedin() {
+            // window.open('http://localhost:5000/linkedin', '_blank').focus();
+            // this.$router.push({ name: 'home' });
         },
     },
 };

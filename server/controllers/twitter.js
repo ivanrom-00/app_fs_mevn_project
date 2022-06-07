@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
@@ -10,10 +10,11 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/google/callback"
+passport.use(new TwitterStrategy({
+    consumerKey: process.env.TWITTER_CLIENT_ID,
+    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+    callbackURL: "http://localhost:5000/twitter/callback",
+    profileFields: ['id', 'displayName', 'email']
 },
     function (accessToken, refreshToken, profile, done) {
         return done(null, profile);
