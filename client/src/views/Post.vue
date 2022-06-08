@@ -10,9 +10,9 @@
                                 <v-btn small outlined color="primary">{{ post.category }}</v-btn>
                             </v-col>
                             <v-col sm="10" class="d-flex justify-end">
-                                <v-btn v-if="author" color="success" text :to="{ name: 'edit-post', params: { id: post._id } }">Edit
+                                <v-btn v-if="author" small color="indigo" class="mr-2" outlined :to="{ name: 'edit-post', params: { id: post._id } }">Edit
                                 </v-btn>
-                                <v-btn v-if="author" color="red" text @click="removePost(post._id)">Delete</v-btn>
+                                <v-btn v-if="author" small color="red" class="ml-2" outlined @click="removePost(post._id)">Delete</v-btn>
                             </v-col>
                         </v-row>
                     </v-card-actions>

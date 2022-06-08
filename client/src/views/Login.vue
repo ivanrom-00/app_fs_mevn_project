@@ -12,7 +12,7 @@
                         </div> -->
                     <v-form v-model="valid" ref="form" class="pa-5" enctype="multipart/form-data">
                         <v-text-field name="email" label="Email" v-model="email" prepend-icon="mdi-email"
-                            :rules="[rules.required, rules.email]" required>
+                            :rules="[rules.email]" required>
                         </v-text-field>
                         <v-text-field label="Password" v-model="password" prepend-icon="mdi-lock"
                             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :rules="[rules.required]"
